@@ -32,3 +32,18 @@ curl -X POST "http://localhost:8080/predict" \
     -H "Content-Type: application/json" \
     -d '{"petal_length":6.5, "petal_width":0.8}'
 ```
+
+## Outils de test de charge
+
+```bash
+# installation Apache Bench (AB fait partie de la suite apache2-utils)
+sudo apt-get install apache2-utils
+
+# utilisation simple (1000 requêtes totales avec 100 en parallèle)
+ab -n 1000 -c 100 -p request.json -T application/json http://localhost:8080/predict
+
+# analyse des logs d'un service avec replicas
+# -f : follow (en direct)
+# -t : timestamp daemon docker (en plus de ceux de l'appli pour cross verif entre services)
+docker-compose -p mlops logs -t -f mlops-iris-api
+```
