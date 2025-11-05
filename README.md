@@ -98,7 +98,7 @@ for i in {1..20}; \
 ## Configuration des métriques et observabilité
 
 ```bash
-# inspection du réseau docker pour retrouver son masque d'IP
+# inspection du sous réseau docker pour retrouver son masque d'IP
 docker network inspect mlops_default | grep Subnet
 
 # test du fichier de conf après ajustement
@@ -106,6 +106,8 @@ docker exec nginx_revproxy nginx -t
 
 # rechargement à chaud
 docker exec nginx_revproxy nginx -s reload
+
+# NB la meilleure pratique en production serait plutôt de fixer un sous réseau dans le docker compose network
 ```
 
 ## Rappels : Element de debugging
@@ -129,4 +131,7 @@ docker exec nginx_revproxy cat /etc/nginx/nginx.conf
 # - option 2 par docker-compose
 docker-compose -p mlops exec nginx nginx -t 
 docker-compose -p mlops exec nginx cat /etc/nginx/nginx.conf
+
+# Mettre en place et tester une route /health
+docker-compose -p mlops exec nginx curl http://mlops-iris-api:8000/health
 ```
