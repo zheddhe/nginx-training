@@ -59,3 +59,9 @@ def predict(features: IrisFeatures):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
+
+
+@app.get("/health")
+def health():
+    """Endpoint de santé pour vérifier si l'API est opérationnelle."""
+    return {"status": "ok"}
