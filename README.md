@@ -51,7 +51,7 @@ docker-compose -p mlops logs -t -f mlops-iris-api
 ## Gestion de la securité SSL/TLS
 
 ```bash
-# creation d'un certificat autosigné (en root)
+# creation d'un certificat autosigné
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout deployments/nginx/certs/nginx.key -out deployments/nginx/certs/nginx.crt -subj "/CN=localhost"
 
 # generation d'un fichier user/mot de passe htpasswd (initialisation avec un premier user admin)
